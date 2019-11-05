@@ -24,12 +24,15 @@ public class MainShowController{
 	public ModelAndView blogmain(Integer id) throws Exception {
 		
 		System.out.println("控制器blogmain");
-		
+		List<Items> itemsList = itemsService.findItemsList();
 		Items items= itemsService.findItemsById(id);
 		
+		
 		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.addObject("itemsList", itemsList);
 		modelAndView.addObject("item", items);
-		modelAndView.setViewName("Items");
+		//modelAndView.addObject("itemsCustom", itemsCustom);
+		modelAndView.setViewName("titleShow");
 		return modelAndView;
 	}
 	//修改博客
@@ -39,6 +42,12 @@ public class MainShowController{
 		System.out.println("editItemsSubmit控制");
 		
 		Items items = itemsService.findItemsById(id);
+		
+		String str=items.getContexts();
+		str=str.replace("<br>", "\n");
+		str=str.replace("&nbsp;", " ");
+		items.setContexts(str);
+		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.addObject("items", items);
 		modelAndView.setViewName("EditItems");
@@ -54,17 +63,27 @@ public class MainShowController{
 		java.sql.Date now=java.sql.Date.valueOf(nowDate);
 		
 		items.setCreatetime(now);
+		
+		String str=items.getContexts();
+		str=str.replace("\n", "<br>");
+		str=str.replace(" ", "&nbsp;");
+		items.setContexts(str);
+		
+		
 		itemsService.updateItems(items);
 		List<Items> itemsList = itemsService.findItemsList();
 		
 		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.addObject("item",items);
 		modelAndView.addObject("itemsList", itemsList);
 		modelAndView.setViewName("titleShow");
 		return modelAndView;
 	}
 	//列表展示标题
 	@RequestMapping("titleShow")
-	public ModelAndView titleShow(Items items) throws Exception{
+	public ModelAndView titleShow() throws Exception{
+		System.out.println("控制器titleShow");
+
 		List<Items> itemsList = itemsService.findItemsList();
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.addObject("itemsList", itemsList);
@@ -87,8 +106,13 @@ public class MainShowController{
 		String nowDate=sd.format(date);
 		java.sql.Date now=java.sql.Date.valueOf(nowDate);
 		
-		
 		items.setCreatetime(now);
+		
+		String str=items.getContexts();
+		str=str.replace("\n", "<br>");
+		str=str.replace(" ", "&nbsp;");
+		items.setContexts(str);
+		
 		itemsService.insertItems(items);
 		List<Items> itemsList = itemsService.findItemsList();
 		
@@ -108,4 +132,5 @@ public class MainShowController{
 		modelAndView.setViewName("titleShow");
 		return modelAndView;
 	}
+	
 }

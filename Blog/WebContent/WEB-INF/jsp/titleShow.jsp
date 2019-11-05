@@ -2,37 +2,43 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
-<!DOCTYPE html  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 <meta charset="UTF-8">
 <title>博客列表展示</title>
-<style>
-	a{
-		text-decoration:none;
-	}
-</style>
+<!-- bootstrap.min.js框架的引用 -->
+<script src="js/jquery-3.4.1.min.js" charset="UTF-8"></script>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+<script src="js/bootstrap.min.js" charset="utf-8"></script>
+
 
 </head>
 	<body style="background:url(images/backgroud.png);
-	background-repeat:no-repeat;
-	background-size:100% 100%; 
-	background-attachment: fixed;">
-	
-	<table width="600"  align="center" cellpadding="0" cellspacing="0" >
-		<tr><td>
-		<div style="text-align:right;">make by suzanlong</div>
-		<div style="float:right">
-		<a href="${pageContext.request.contextPath }/insertItems.action">
-			<button >新增</button>
-		</a>
+			background-repeat:no-repeat;
+			background-size:100% 100%; 
+			background-attachment: fixed;"  >
+
+
+	<div class="row">
+		<div class="col-md-2 col-md-offset-1" >
+			<br><br><br><br>
+			<a href="${pageContext.request.contextPath }/insertItems.action">
+				<button type="button" class="btn btn-success">新增</button>
+			</a><br><br>
+			<ul class="list-group">
+				<c:forEach items="${itemsList }" var="item">
+				<a class="list-group-item" href="${pageContext.request.contextPath }/blogmain.action?id=${item.id }"
+						 style="font:bold 17px 宋体;color:black;text-align:center;">${item.title }</a>
+			</c:forEach>
+			</ul>
 		</div>
-		<ul>
-			<c:forEach items="${itemsList }" var="item">
-			<li><a href="${pageContext.request.contextPath }/blogmain.action?id=${item.id }"
-					 style="font:bold 25px 宋体;color:black;text-align:center;">${item.title }</a>
-		</c:forEach>
-		</ul>
-	</td></tr></table>
+		<br><br>
+		<div class="col-md-6" >
+			<jsp:include page="Items.jsp"/>
+		</div>
+	</div>
+	
+	
 </body>
 </html>
