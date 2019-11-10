@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.suzanlong.mapper.ItemsMapper;
 import com.suzanlong.po.Items;
-import com.suzanlong.po.ItemsCustom;
 import com.suzanlong.service.ItemsService;
 
 @Service
@@ -47,14 +46,5 @@ public class ItemsServiceImpl implements ItemsService{
 		
 	}
 
-	@Override
-	public ItemsCustom getTitleShow(Integer id) throws Exception {
-		ItemsCustom itemsCustom=new ItemsCustom();
-		List<Items> showItems=itemsMapper.findItemsList();
-		Items oneItems=itemsMapper.findItemsById(id);
-		itemsCustom.setShowItems(showItems);
-		itemsCustom.setOneItems(oneItems);
-		return itemsCustom;
-	}
 	
 }

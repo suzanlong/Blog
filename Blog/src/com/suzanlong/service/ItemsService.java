@@ -3,7 +3,7 @@ package com.suzanlong.service;
 import java.util.List;
 
 import com.suzanlong.po.Items;
-import com.suzanlong.po.ItemsCustom;
+
 
 public interface ItemsService {
 	public List<Items> findItemsList() throws Exception;
@@ -17,6 +17,5 @@ public interface ItemsService {
 	
 	public void deleteItems(Integer id) throws Exception;
 	//包装类
-	public ItemsCustom getTitleShow(Integer id)throws Exception;
-	
+
 }

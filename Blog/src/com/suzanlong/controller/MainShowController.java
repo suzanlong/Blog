@@ -23,7 +23,7 @@ public class MainShowController{
 	@RequestMapping("/blogmain")
 	public ModelAndView blogmain(Integer id) throws Exception {
 		
-		System.out.println("控制器blogmain");
+		//System.out.println("控制器blogmain");
 		List<Items> itemsList = itemsService.findItemsList();
 		Items items= itemsService.findItemsById(id);
 		
@@ -132,5 +132,28 @@ public class MainShowController{
 		modelAndView.setViewName("titleShow");
 		return modelAndView;
 	}
+//	@RequestMapping("pic")
+//	public ModelAndView pic(MultipartFile blogpic) throws Exception{
+//		
+//		if(blogpic!=null) {
+//			
+//			String pic_path="E:\\picdata";			//图片路径
+//			
+//			String originalFilename=blogpic.getOriginalFilename();	//图片原始名称
+//			//新图片名称
+//			String newfileName=UUID.randomUUID()+originalFilename.substring(originalFilename.lastIndexOf("."));
+//			
+//			File newFile = new java.io.File(pic_path+newfileName);
+//			//将内存中数据存入磁盘
+//			blogpic.transferTo(newFile);
+//			
+//			
+//		}
+//		
+//		ModelAndView modelAndView=new ModelAndView();
+//		modelAndView.setViewName("pic");
+//		return modelAndView;
+//	}
+	
 	
 }

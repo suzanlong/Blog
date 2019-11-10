@@ -19,5 +19,9 @@
 	<!-- 商品管理service -->
 	
 	<bean id="itemsService" class="com.suzanlong.service.impl.ItemsServiceImpl"/>
+	<!-- 图片管理service -->
+	<bean id="blogService" class="com.suzanlong.service.impl.BlogServiceImpl"/>
+	
+	<bean id="allPic" class="com.suzanlong.po.Allpic"></bean>
 	
 </beans>

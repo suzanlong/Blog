@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suzanlong.mapper.BlogpicMapper">
+	<select id="findAll" resultType="com.suzanlong.po.Blogpic">
+		select * from tb_logs
+	</select>
+	
+	<select id="findPicById" parameterType="Integer" resultType="com.suzanlong.po.Blogpic">
+		select * from tb_logs where id=#{id}
+	</select>
+		
+	<select id="findPicByPicId" parameterType="Integer" resultType="String">
+		SELECT pic FROM tb_pic,tb_logs WHERE tb_pic.pic_id=tb_logs.id AND tb_pic.pic_id=#{id}
+	</select>
+	
+	<update id="updateBlog" parameterType="com.suzanlong.po.Blogpic">
+		update tb_logs set contexts=#{contexts},createtime=#{createtime} where id=#{id}
+	</update>
+	
+	
+	<delete id="deleteBlog" parameterType="Integer">
+		DELETE FROM tb_logs WHERE id=#{id}
+	</delete>
+	
+	<delete id="deletePic" parameterType="Integer">
+		delete from tb_pic where pic_id=#{logs_id}
+	</delete>
+	
+	<insert id="insertBlog" parameterType="com.suzanlong.po.Blogpic">
+		insert into tb_logs (contexts,createtime) values (#{contexts},#{createtime})
+	</insert>
+	
+	<insert id="insertPic" parameterType="com.suzanlong.po.Allpic">
+		insert into tb_pic (pic_id,pic) values (#{logs_id},#{pic})
+	</insert>
+	
+</mapper>
